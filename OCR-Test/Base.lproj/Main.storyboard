@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController id="vXZ-lx-hvc" customClass="G8ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Lfb-xc-blL"/>
+                        <viewControllerLayoutGuide type="bottom" id="RCk-I1-Jc5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OCR TEST" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="267" translatesAutoresizingMaskIntoConstraints="NO" id="i3a-Pb-LXN">
+                                <rect key="frame" x="137.5" y="40" width="101.5" height="24"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qou-Zy-wCC">
+                                <rect key="frame" x="129" y="144" width="117" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="bHT-Al-EQn"/>
+                                    <constraint firstAttribute="width" constant="117" id="uIr-x8-1QO"/>
+                                </constraints>
+                                <state key="normal" title="touch for camera">
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="openCamera:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="zIB-3y-4aU"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="msa-Y5-mNu">
+                                <rect key="frame" x="167.5" y="84" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="hKU-2C-onJ"/>
+                                    <constraint firstAttribute="height" constant="40" id="o53-Nz-vad"/>
+                                </constraints>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ylc-Ei-4qY">
+                                <rect key="frame" x="95" y="194" width="185" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="185" id="VJz-QP-s6q"/>
+                                    <constraint firstAttribute="height" constant="30" id="bRc-V5-PYB"/>
+                                </constraints>
+                                <state key="normal" title="or recognize sample image">
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="recognizeSampleImage:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="T9z-fe-7sH"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="a6g-8P-2MZ">
+                                <rect key="frame" x="37.5" y="294" width="300" height="303"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="p3u-9g-6oR"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RDm-c7-fMx">
+                                <rect key="frame" x="148" y="244" width="79" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="GHi-dC-ji6"/>
+                                    <constraint firstAttribute="width" constant="79" id="zSu-gV-ePf"/>
+                                </constraints>
+                                <state key="normal" title="clear cache">
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="clearCache:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="3aw-NS-Jqs"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vun-mb-tr9">
+                                <rect key="frame" x="143" y="617" width="90" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="CE2-ns-oMO"/>
+                                </constraints>
+                                <state key="normal" title="Open Photos"/>
+                                <connections>
+                                    <action selector="openPhotos:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Mxg-64-tbH"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="vun-mb-tr9" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="5PV-ZK-MJe"/>
+                            <constraint firstItem="msa-Y5-mNu" firstAttribute="top" secondItem="i3a-Pb-LXN" secondAttribute="bottom" constant="20" id="5sF-hp-AER"/>
+                            <constraint firstItem="i3a-Pb-LXN" firstAttribute="top" secondItem="Lfb-xc-blL" secondAttribute="bottom" constant="20" id="6Xg-Cz-Zwn"/>
+                            <constraint firstItem="ylc-Ei-4qY" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="Cq5-qc-iFr"/>
+                            <constraint firstItem="qou-Zy-wCC" firstAttribute="top" secondItem="msa-Y5-mNu" secondAttribute="bottom" constant="20" id="K6Z-RA-DZ8"/>
+                            <constraint firstItem="i3a-Pb-LXN" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="Lzg-Xq-zBc"/>
+                            <constraint firstItem="msa-Y5-mNu" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="MAc-nM-afP"/>
+                            <constraint firstItem="vun-mb-tr9" firstAttribute="top" secondItem="a6g-8P-2MZ" secondAttribute="bottom" constant="20" id="S7L-86-GNS"/>
+                            <constraint firstItem="ylc-Ei-4qY" firstAttribute="top" secondItem="qou-Zy-wCC" secondAttribute="bottom" constant="20" id="WRx-j4-UUm"/>
+                            <constraint firstItem="a6g-8P-2MZ" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="ZjO-Cz-SPU"/>
+                            <constraint firstItem="RDm-c7-fMx" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="gEy-Bs-DdX"/>
+                            <constraint firstItem="RDm-c7-fMx" firstAttribute="top" secondItem="ylc-Ei-4qY" secondAttribute="bottom" constant="20" id="ipi-kM-5Vt"/>
+                            <constraint firstItem="RCk-I1-Jc5" firstAttribute="top" secondItem="vun-mb-tr9" secondAttribute="bottom" constant="20" id="o6s-SI-BTK"/>
+                            <constraint firstItem="a6g-8P-2MZ" firstAttribute="top" secondItem="RDm-c7-fMx" secondAttribute="bottom" constant="20" id="oyu-aR-jxM"/>
+                            <constraint firstItem="qou-Zy-wCC" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="zTU-Ah-Wfv"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="msa-Y5-mNu" id="z0b-ab-Bwr"/>
+                        <outlet property="imageToRecognize" destination="a6g-8P-2MZ" id="6Ll-HE-vOQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
+    </simulatedMetricsContainer>
+</document>
