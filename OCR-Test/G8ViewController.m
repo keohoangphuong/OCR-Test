@@ -8,6 +8,7 @@
 //
 
 #import "G8ViewController.h"
+#import "GPUImage.h"
 
 @interface G8ViewController ()
 
@@ -49,7 +50,7 @@
     // Let Tesseract automatically segment the page into blocks of text
     // based on its analysis (see G8Constants.h) for other page segmentation
     // mode options
-    operation.tesseract.pageSegmentationMode = G8PageSegmentationModeAutoOnly;
+    operation.tesseract.pageSegmentationMode = G8PageSegmentationModeAuto;
     
     // Optionally limit the time Tesseract should spend performing the
     // recognition
@@ -66,11 +67,11 @@
     //operation.tesseract.charBlacklist = @"56789";
     
     // Set the image on which Tesseract should perform recognition
-    operation.tesseract.image = image;
+    operation.tesseract.image = [self preprocessedImageForTesseract:operation.tesseract sourceImage:image];
 
     // Optionally limit the region in the image on which Tesseract should
     // perform recognition to a rectangle
-    //operation.tesseract.rect = CGRectMake(20, 20, 100, 100);
+    //operation.tesseract.rect = CGRectMake(40, 250, 200, 300);
 
     // Specify the function block that should be executed when Tesseract
     // finishes performing recognition on the image
@@ -107,6 +108,24 @@
  */
 - (void)progressImageRecognitionForTesseract:(G8Tesseract *)tesseract {
     NSLog(@"progress: %lu", (unsigned long)tesseract.progress);
+}
+
+- (UIImage *)preprocessedImageForTesseract:(G8Tesseract *)tesseract sourceImage:(UIImage *)sourceImage {
+    
+    // sourceImage is the same image you sent to Tesseract above
+    UIImage *inputImage = sourceImage;
+    
+    // Initialize our adaptive threshold filter
+    GPUImageAdaptiveThresholdFilter *stillImageFilter = [[GPUImageAdaptiveThresholdFilter alloc] init];
+    stillImageFilter.blurRadiusInPixels = 4.0; // adjust this to tweak the blur radius of the filter, defaults to 4.0
+    
+    // Retrieve the filtered image from the filter
+    UIImage *filteredImage = [stillImageFilter imageByFilteringImage:inputImage];
+    
+    // Give the filteredImage to Tesseract instead of the original one,
+    // allowing us to bypass the internal thresholding step.
+    // filteredImage will be sent immediately to the recognition step
+    return filteredImage;
 }
 
 /**
