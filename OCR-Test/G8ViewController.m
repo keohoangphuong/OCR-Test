@@ -10,6 +10,15 @@
 #import "G8ViewController.h"
 #import "GPUImage.h"
 
+static inline double radians (double degrees) {return degrees * M_PI/180;}
+
+typedef enum {
+    ALPHA = 0,
+    BLUE = 1,
+    GREEN = 2,
+    RED = 3
+} PIXELS;
+
 @interface G8ViewController ()
 
 @property (nonatomic, strong) NSOperationQueue *operationQueue;
@@ -50,7 +59,7 @@
     // Let Tesseract automatically segment the page into blocks of text
     // based on its analysis (see G8Constants.h) for other page segmentation
     // mode options
-    operation.tesseract.pageSegmentationMode = G8PageSegmentationModeAuto;
+    operation.tesseract.pageSegmentationMode = G8PageSegmentationModeAutoOnly;
     
     // Optionally limit the time Tesseract should spend performing the
     // recognition
@@ -67,7 +76,8 @@
     //operation.tesseract.charBlacklist = @"56789";
     
     // Set the image on which Tesseract should perform recognition
-    operation.tesseract.image = [self preprocessedImageForTesseract:operation.tesseract sourceImage:image];
+    operation.tesseract.image = [self preprocessedImageForTesseract:operation.tesseract sourceImage:[self convertToGreyscale:image]];
+    //operation.tesseract.image = [self convertToGreyscale:image];
 
     // Optionally limit the region in the image on which Tesseract should
     // perform recognition to a rectangle
@@ -128,6 +138,106 @@
     return filteredImage;
 }
 
+
+
+#pragma mark-
+#pragma mark - GrayScale
+
+// Transform the image in grayscale.
+- (UIImage*) grayishImage: (UIImage*) inputImage {
+    
+    // Create a graphic context.
+    UIGraphicsBeginImageContextWithOptions(inputImage.size, YES, 1.0);
+    CGRect imageRect = CGRectMake(0, 0, inputImage.size.width, inputImage.size.height);
+    
+    // Draw the image with the luminosity blend mode.
+    // On top of a white background, this will give a black and white image.
+    [inputImage drawInRect:imageRect blendMode:kCGBlendModeLuminosity alpha:1.0];
+    
+    // Get the resulting image.
+    UIImage *filteredImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return filteredImage;
+    
+}
+
+- (UIImage *)convertToGreyscale:(UIImage *)i {
+    
+    int kRed = 1;
+    int kGreen = 2;
+    int kBlue = 4;
+    
+    int colors = kGreen | kBlue | kRed;
+    int m_width = i.size.width;
+    int m_height = i.size.height;
+    
+    uint32_t *rgbImage = (uint32_t *) malloc(m_width * m_height * sizeof(uint32_t));
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef context = CGBitmapContextCreate(rgbImage, m_width, m_height, 8, m_width * 4, colorSpace, kCGBitmapByteOrder32Little | kCGImageAlphaNoneSkipLast);
+    CGContextSetInterpolationQuality(context, kCGInterpolationHigh);
+    CGContextSetShouldAntialias(context, NO);
+    CGContextDrawImage(context, CGRectMake(0, 0, m_width, m_height), [i CGImage]);
+    CGContextRelease(context);
+    CGColorSpaceRelease(colorSpace);
+    
+    // now convert to grayscale
+    uint8_t *m_imageData = (uint8_t *) malloc(m_width * m_height);
+    for(int y = 0; y < m_height; y++) {
+        for(int x = 0; x < m_width; x++) {
+            uint32_t rgbPixel = rgbImage[y*m_width+x];
+            uint32_t sum = 0, count = 0;
+            if (colors & kRed) {sum += (rgbPixel >> 24) & 255; count++;}
+            if (colors & kGreen) {sum += (rgbPixel >> 16)&  255; count++;}
+            if (colors & kBlue) {sum += (rgbPixel >> 8) & 255; count++;}
+            m_imageData[y*m_width + x] = sum/count;
+        }
+    }
+    free(rgbImage);
+    
+    // convert from a gray scale image back into a UIImage
+    uint8_t *result = (uint8_t *) calloc(m_width * m_height *sizeof(uint32_t), 1);
+    
+    // process the image back to rgb
+    for(int i = 0; i < m_height * m_width; i++) {
+        result[i*4]=0;
+        int val = m_imageData[i];
+        result[i*4+1] = val;
+        result[i*4+2] = val;
+        result[i*4+3] = val;
+    }
+    
+    // create a UIImage
+    colorSpace = CGColorSpaceCreateDeviceRGB();
+    context = CGBitmapContextCreate(result, m_width, m_height, 8, m_width * sizeof(uint32_t), colorSpace, kCGBitmapByteOrder32Little | kCGImageAlphaNoneSkipLast);
+    
+//    if (i.imageOrientation == UIImageOrientationRight) {
+//        CGContextRotateCTM (context, radians(90));
+//    } else if (i.imageOrientation == UIImageOrientationLeft) {
+//        CGContextRotateCTM (context, radians(-90));
+//    } else if (i.imageOrientation == UIImageOrientationDown) {
+//        // NOTHING
+//    } else if (i.imageOrientation == UIImageOrientationUp) {
+//        CGContextRotateCTM (context, radians(90));
+//    }
+    
+    CGImageRef image = CGBitmapContextCreateImage(context);
+    CGContextRelease(context);
+    CGColorSpaceRelease(colorSpace);
+    UIImage *resultUIImage = [UIImage imageWithCGImage:image];
+    CGImageRelease(image);
+    
+    free(m_imageData);
+    
+    // make sure the data will be released by giving it to an autoreleased NSData
+    [NSData dataWithBytesNoCopy:result length:m_width * m_height];
+    
+    return resultUIImage;
+}
+
+#pragma mark - 
+#pragma mark - Action
+
 /**
  *  This function is part of Tesseract's delegate. It will be called
  *  periodically as the recognition happens so you can cancel the recogntion
@@ -178,4 +288,5 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
     [self recognizeImageWithTesseract:image];
 }
+
 @end

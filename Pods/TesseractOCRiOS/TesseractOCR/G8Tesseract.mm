@@ -487,6 +487,7 @@ copyFilesFromResources:(BOOL)copyFilesFromResources
 
     NSString *text = [NSString stringWithUTF8String:utf8Text];
     delete[] utf8Text;
+    
     return text;
 }
 
