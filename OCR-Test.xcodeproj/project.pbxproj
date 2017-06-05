@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C60700F01EE13CF800892EB5 /* ImageCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = C6BD29881EDED7850055DFAA /* ImageCropView.m */; };
 		C63F81951EDBE11600383DC3 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C63F81941EDBE11600383DC3 /* CoreMedia.framework */; };
 		C63F81971EDBE11E00383DC3 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C63F81961EDBE11E00383DC3 /* CoreVideo.framework */; };
 		C63F81991EDBE12B00383DC3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C63F81981EDBE12B00383DC3 /* OpenGLES.framework */; };
 		C63F819B1EDBE14600383DC3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C63F819A1EDBE14600383DC3 /* AVFoundation.framework */; };
-		C63F819D1EDBE14F00383DC3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C63F819C1EDBE14F00383DC3 /* QuartzCore.framework */; };
 		C63F85121EDBE9B500383DC3 /* GLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = C63F83B21EDBE9B500383DC3 /* GLProgram.m */; };
 		C63F85131EDBE9B500383DC3 /* GPUImage3x3ConvolutionFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = C63F83B51EDBE9B500383DC3 /* GPUImage3x3ConvolutionFilter.m */; };
 		C63F85141EDBE9B500383DC3 /* GPUImage3x3TextureSamplingFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = C63F83B71EDBE9B500383DC3 /* GPUImage3x3TextureSamplingFilter.m */; };
@@ -186,6 +186,9 @@
 		C63F85BD1EDBE9B500383DC3 /* GPUImagePicture+TextureSubimage.m in Sources */ = {isa = PBXBuildFile; fileRef = C63F850D1EDBE9B500383DC3 /* GPUImagePicture+TextureSubimage.m */; };
 		C63F85BE1EDBE9B500383DC3 /* GPUImagePicture.m in Sources */ = {isa = PBXBuildFile; fileRef = C63F850F1EDBE9B500383DC3 /* GPUImagePicture.m */; };
 		C63F85BF1EDBE9B500383DC3 /* GPUImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C63F85111EDBE9B500383DC3 /* GPUImageView.m */; };
+		C66E11541EE15EF800A547FB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C67273E11ED6E134006B815D /* Foundation.framework */; };
+		C66E11551EE15EFE00A547FB /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C63F85C81EDECE8800383DC3 /* Accelerate.framework */; };
+		C66E11561EE15F0E00A547FB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C63F819C1EDBE14F00383DC3 /* QuartzCore.framework */; };
 		C67273B81ED6CAFD006B815D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C67273B71ED6CAFD006B815D /* main.m */; };
 		C67273BB1ED6CAFD006B815D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C67273BA1ED6CAFD006B815D /* AppDelegate.m */; };
 		C67273C11ED6CAFD006B815D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C67273BF1ED6CAFD006B815D /* Main.storyboard */; };
@@ -198,7 +201,7 @@
 		C67273DC1ED6E0FA006B815D /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C67273DB1ED6E0FA006B815D /* CoreImage.framework */; };
 		C67273DE1ED6E10A006B815D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C67273DD1ED6E10A006B815D /* CoreGraphics.framework */; };
 		C67273E01ED6E12D006B815D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C67273DF1ED6E12D006B815D /* UIKit.framework */; };
-		C67273E21ED6E134006B815D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C67273E11ED6E134006B815D /* Foundation.framework */; };
+		C6BD298E1EDFBD1B0055DFAA /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = C6BD298C1EDED7AA0055DFAA /* FXBlurView.m */; };
 		FA289019E4F611C53111AE8A /* libPods-OCR-Test.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD6EA1ECCE2BB16417899164 /* libPods-OCR-Test.a */; };
 /* End PBXBuildFile section */
 
@@ -562,6 +565,7 @@
 		C63F850F1EDBE9B500383DC3 /* GPUImagePicture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPUImagePicture.m; sourceTree = "<group>"; };
 		C63F85101EDBE9B500383DC3 /* GPUImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPUImageView.h; sourceTree = "<group>"; };
 		C63F85111EDBE9B500383DC3 /* GPUImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPUImageView.m; sourceTree = "<group>"; };
+		C63F85C81EDECE8800383DC3 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		C67273B31ED6CAFD006B815D /* OCR-Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OCR-Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C67273B71ED6CAFD006B815D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C67273B91ED6CAFD006B815D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -579,6 +583,10 @@
 		C67273DD1ED6E10A006B815D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		C67273DF1ED6E12D006B815D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C67273E11ED6E134006B815D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C6BD29871EDED7850055DFAA /* ImageCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageCropView.h; path = ImageCrop/ImageCropView.h; sourceTree = "<group>"; };
+		C6BD29881EDED7850055DFAA /* ImageCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageCropView.m; path = ImageCrop/ImageCropView.m; sourceTree = "<group>"; };
+		C6BD298B1EDED7AA0055DFAA /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FXBlurView.h; path = ImageCrop/FXBlurView/FXBlurView.h; sourceTree = "<group>"; };
+		C6BD298C1EDED7AA0055DFAA /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FXBlurView.m; path = ImageCrop/FXBlurView/FXBlurView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -586,12 +594,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C63F819D1EDBE14F00383DC3 /* QuartzCore.framework in Frameworks */,
+				C66E11561EE15F0E00A547FB /* QuartzCore.framework in Frameworks */,
+				C66E11551EE15EFE00A547FB /* Accelerate.framework in Frameworks */,
+				C66E11541EE15EF800A547FB /* Foundation.framework in Frameworks */,
 				C63F819B1EDBE14600383DC3 /* AVFoundation.framework in Frameworks */,
 				C63F81991EDBE12B00383DC3 /* OpenGLES.framework in Frameworks */,
 				C63F81971EDBE11E00383DC3 /* CoreVideo.framework in Frameworks */,
 				C63F81951EDBE11600383DC3 /* CoreMedia.framework in Frameworks */,
-				C67273E21ED6E134006B815D /* Foundation.framework in Frameworks */,
 				C67273E01ED6E12D006B815D /* UIKit.framework in Frameworks */,
 				C67273DE1ED6E10A006B815D /* CoreGraphics.framework in Frameworks */,
 				C67273DC1ED6E0FA006B815D /* CoreImage.framework in Frameworks */,
@@ -606,6 +615,7 @@
 		423764BA8699525DBA3ED597 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C63F85C81EDECE8800383DC3 /* Accelerate.framework */,
 				C63F819C1EDBE14F00383DC3 /* QuartzCore.framework */,
 				C63F819A1EDBE14600383DC3 /* AVFoundation.framework */,
 				C63F81981EDBE12B00383DC3 /* OpenGLES.framework */,
@@ -1033,6 +1043,7 @@
 		C67273B51ED6CAFD006B815D /* OCR-Test */ = {
 			isa = PBXGroup;
 			children = (
+				C6BD29861EDED7320055DFAA /* ImageCrop */,
 				C63F83AF1EDBE9B500383DC3 /* GPUImage Framework */,
 				C67273D21ED6CD92006B815D /* tessdata */,
 				C67273B91ED6CAFD006B815D /* AppDelegate.h */,
@@ -1055,6 +1066,25 @@
 				C67273B71ED6CAFD006B815D /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C6BD29861EDED7320055DFAA /* ImageCrop */ = {
+			isa = PBXGroup;
+			children = (
+				C6BD298A1EDED78A0055DFAA /* FXBlurView */,
+				C6BD29871EDED7850055DFAA /* ImageCropView.h */,
+				C6BD29881EDED7850055DFAA /* ImageCropView.m */,
+			);
+			name = ImageCrop;
+			sourceTree = "<group>";
+		};
+		C6BD298A1EDED78A0055DFAA /* FXBlurView */ = {
+			isa = PBXGroup;
+			children = (
+				C6BD298B1EDED7AA0055DFAA /* FXBlurView.h */,
+				C6BD298C1EDED7AA0055DFAA /* FXBlurView.m */,
+			);
+			name = FXBlurView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1189,6 +1219,7 @@
 				C67273C41ED6CAFD006B815D /* OCR_Test.xcdatamodeld in Sources */,
 				C63F85761EDBE9B500383DC3 /* GPUImageNonMaximumSuppressionFilter.m in Sources */,
 				C63F85A71EDBE9B500383DC3 /* GPUImageThresholdSketchFilter.m in Sources */,
+				C60700F01EE13CF800892EB5 /* ImageCropView.m in Sources */,
 				C63F85BE1EDBE9B500383DC3 /* GPUImagePicture.m in Sources */,
 				C63F859C1EDBE9B500383DC3 /* GPUImageSourceOverBlendFilter.m in Sources */,
 				C63F85A91EDBE9B500383DC3 /* GPUImageToneCurveFilter.m in Sources */,
@@ -1285,6 +1316,7 @@
 				C63F85281EDBE9B500383DC3 /* GPUImageColorDodgeBlendFilter.m in Sources */,
 				C63F85521EDBE9B500383DC3 /* GPUImageHighPassFilter.m in Sources */,
 				C63F854E1EDBE9B500383DC3 /* GPUImageHarrisCornerDetectionFilter.m in Sources */,
+				C6BD298E1EDFBD1B0055DFAA /* FXBlurView.m in Sources */,
 				C63F856B1EDBE9B500383DC3 /* GPUImageMaskFilter.m in Sources */,
 				C63F85301EDBE9B500383DC3 /* GPUImageCropFilter.m in Sources */,
 				C63F85631EDBE9B500383DC3 /* GPUImageLineGenerator.m in Sources */,
@@ -1474,6 +1506,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1489,6 +1522,20 @@
 				INFOPLIST_FILE = "OCR-Test/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+					"-weak_library",
+					"/usr/lib/libstdc++.6.0.9.dylib",
+					"-l\"TesseractOCRiOS\"",
+					"-l\"lept\"",
+					"-l\"stdc++\"",
+					"-l\"tesseract_all\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"UIKit\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.onsukuIAP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1503,6 +1550,20 @@
 				INFOPLIST_FILE = "OCR-Test/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+					"-weak_library",
+					"/usr/lib/libstdc++.6.0.9.dylib",
+					"-l\"TesseractOCRiOS\"",
+					"-l\"lept\"",
+					"-l\"stdc++\"",
+					"-l\"tesseract_all\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"UIKit\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.onsukuIAP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

@@ -9,10 +9,9 @@
 
 #import <UIKit/UIKit.h>
 #import <TesseractOCR/TesseractOCR.h>
+#import "ImageCropView.h"
 
-@interface G8ViewController : UIViewController <G8TesseractDelegate,
-                                                UIImagePickerControllerDelegate,
-                                                UINavigationControllerDelegate>
+@interface G8ViewController : UIViewController <G8TesseractDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImageCropViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageToRecognize;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;

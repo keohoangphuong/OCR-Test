@@ -10,8 +10,6 @@
 #import "G8ViewController.h"
 #import "GPUImage.h"
 
-static inline double radians (double degrees) {return degrees * M_PI/180;}
-
 typedef enum {
     ALPHA = 0,
     BLUE = 1,
@@ -25,11 +23,6 @@ typedef enum {
 
 @end
 
-
-/**
- *  For more information about using `G8Tesseract`, visit the GitHub page at:
- *  https://github.com/gali8/Tesseract-OCR-iOS
- */
 @implementation G8ViewController
 
 - (void)viewDidLoad
@@ -73,7 +66,7 @@ typedef enum {
     // Optionally limit Tesseract's recognition to the following whitelist
     // and blacklist of characters
     //operation.tesseract.charWhitelist = @"01234";
-    //operation.tesseract.charBlacklist = @"56789";
+    operation.tesseract.charBlacklist = @"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     
     // Set the image on which Tesseract should perform recognition
     operation.tesseract.image = [self preprocessedImageForTesseract:operation.tesseract sourceImage:[self convertToGreyscale:image]];
@@ -143,25 +136,6 @@ typedef enum {
 #pragma mark-
 #pragma mark - GrayScale
 
-// Transform the image in grayscale.
-- (UIImage*) grayishImage: (UIImage*) inputImage {
-    
-    // Create a graphic context.
-    UIGraphicsBeginImageContextWithOptions(inputImage.size, YES, 1.0);
-    CGRect imageRect = CGRectMake(0, 0, inputImage.size.width, inputImage.size.height);
-    
-    // Draw the image with the luminosity blend mode.
-    // On top of a white background, this will give a black and white image.
-    [inputImage drawInRect:imageRect blendMode:kCGBlendModeLuminosity alpha:1.0];
-    
-    // Get the resulting image.
-    UIImage *filteredImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return filteredImage;
-    
-}
-
 - (UIImage *)convertToGreyscale:(UIImage *)i {
     
     int kRed = 1;
@@ -211,16 +185,6 @@ typedef enum {
     colorSpace = CGColorSpaceCreateDeviceRGB();
     context = CGBitmapContextCreate(result, m_width, m_height, 8, m_width * sizeof(uint32_t), colorSpace, kCGBitmapByteOrder32Little | kCGImageAlphaNoneSkipLast);
     
-//    if (i.imageOrientation == UIImageOrientationRight) {
-//        CGContextRotateCTM (context, radians(90));
-//    } else if (i.imageOrientation == UIImageOrientationLeft) {
-//        CGContextRotateCTM (context, radians(-90));
-//    } else if (i.imageOrientation == UIImageOrientationDown) {
-//        // NOTHING
-//    } else if (i.imageOrientation == UIImageOrientationUp) {
-//        CGContextRotateCTM (context, radians(90));
-//    }
-    
     CGImageRef image = CGBitmapContextCreateImage(context);
     CGContextRelease(context);
     CGColorSpaceRelease(colorSpace);
@@ -238,15 +202,6 @@ typedef enum {
 #pragma mark - 
 #pragma mark - Action
 
-/**
- *  This function is part of Tesseract's delegate. It will be called
- *  periodically as the recognition happens so you can cancel the recogntion
- *  prematurely if necessary.
- *
- *  @param tesseract The `G8Tesseract` object performing the recognition.
- *
- *  @return Whether or not to cancel the recognition.
- */
 - (BOOL)shouldCancelImageRecognitionForTesseract:(G8Tesseract *)tesseract {
     return NO;  // return YES, if you need to cancel recognition prematurely
 }
@@ -254,6 +209,7 @@ typedef enum {
 - (IBAction)openCamera:(id)sender
 {
     UIImagePickerController *imgPicker = [UIImagePickerController new];
+    imgPicker.allowsEditing = NO;
     imgPicker.delegate = self;
 
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
@@ -275,7 +231,7 @@ typedef enum {
 - (IBAction)openPhotos:(id)sender {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
-    picker.allowsEditing = YES;
+    picker.allowsEditing = NO;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
     [self presentViewController:picker animated:YES completion:nil];
@@ -284,9 +240,61 @@ typedef enum {
 #pragma mark - UIImagePickerController Delegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    UIImage *image = [[UIImage alloc] init];
+
+    if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+        image = [self imageWithImage:info[UIImagePickerControllerOriginalImage] scaledToFillSize:CGSizeMake(1200, 1200)];
+    } else {
+        image = info[UIImagePickerControllerOriginalImage];
+    }
+    
     [picker dismissViewControllerAnimated:YES completion:nil];
+
+    [self cropImage:image];
+}
+
+#pragma mark - ImageCrop Delegate
+
+- (void)ImageCropViewControllerSuccess:(ImageCropViewController *)controller didFinishCroppingImage:(UIImage *)croppedImage {
+    [[self navigationController] popViewControllerAnimated:YES];
+    [self recognizeImage:croppedImage];
+}
+
+- (void)ImageCropViewControllerDidCancel:(ImageCropViewController *)controller{
+    [[self navigationController] popViewControllerAnimated:YES];
+}
+
+#pragma mark - Resize Image
+
+- (void)recognizeImage:(UIImage *)image {
     [self recognizeImageWithTesseract:image];
+}
+
+- (void)cropImage:(UIImage *)image {
+    if(image != nil){
+        ImageCropViewController *controller = [[ImageCropViewController alloc] initWithImage:image];
+        controller.delegate = self;
+        controller.blurredBackground = YES;
+        // set the cropped area
+        // controller.cropArea = CGRectMake(0, 0, 100, 200);
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+}
+
+- (UIImage *)imageWithImage:(UIImage *)image scaledToFillSize:(CGSize)size {
+    CGFloat scale = MAX(size.width/image.size.width, size.height/image.size.height);
+    CGFloat width = image.size.width * scale;
+    CGFloat height = image.size.height * scale;
+    CGRect imageRect = CGRectMake((size.width - width)/2.0f,
+                                  (size.height - height)/2.0f,
+                                  width,
+                                  height);
+    
+    UIGraphicsBeginImageContextWithOptions(size, YES, 1.0);
+    [image drawInRect:imageRect];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 @end
